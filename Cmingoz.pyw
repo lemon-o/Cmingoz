@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QHBoxLayout, QVBoxLayout, QLineEdit, QPushButton, QMessageBox, QDesktopWidget
-from PyQt5.QtGui import QIcon, QKeySequence, QIntValidator
-from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtGui import QIcon, QKeySequence, QRegExpValidator
+from PyQt5.QtCore import Qt, QTimer, QRegExp
 from PyQt5.QtWidgets import QFrame, QShortcut
 
 
@@ -28,22 +28,22 @@ class ConverterWidget(QWidget):
         self.cm_input = QLineEdit()
         self.cm_input.setStyleSheet(linedit_style)
         self.cm_input.setFixedHeight(linedit_height)
-        validator1 = QIntValidator()
+        validator1 = QRegExpValidator(QRegExp(r'^[0-9]+(\.[0-9]+)?$'))
         self.cm_input.setValidator(validator1)
         self.in_input = QLineEdit()
         self.in_input.setStyleSheet(linedit_style)
         self.in_input.setFixedHeight(linedit_height)
-        validator2 = QIntValidator()
+        validator2 = QRegExpValidator(QRegExp(r'^[0-9]+(\.[0-9]+)?$'))
         self.in_input.setValidator(validator2)        
         self.g_input = QLineEdit()
         self.g_input.setStyleSheet(linedit_style)
         self.g_input.setFixedHeight(linedit_height)
-        validator3 = QIntValidator()
+        validator3 = QRegExpValidator(QRegExp(r'^[0-9]+(\.[0-9]+)?$'))
         self.g_input.setValidator(validator3)
         self.oz_input = QLineEdit()
         self.oz_input.setStyleSheet(linedit_style)
         self.oz_input.setFixedHeight(linedit_height)
-        validator4 = QIntValidator()
+        validator4 = QRegExpValidator(QRegExp(r'^[0-9]+(\.[0-9]+)?$'))
         self.oz_input.setValidator(validator4)
 
         label_style_1 = 'color: #3B3E41; margin-top: 0px; margin-bottom: 0px;'

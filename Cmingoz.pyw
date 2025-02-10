@@ -22,6 +22,8 @@ class ConverterWidget(QWidget):
         x = (screen_width - self.width()) / 2
         y = (screen_height - FIXED_HEIGHT) / 2
         self.move(int(x), int(y))
+        # Set window flags to stay on top
+        self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
 
         linedit_style = 'background-color: white; color: #272727; border-radius: 6px; border: 1px solid #C5C5C5;'
         linedit_height = 22
@@ -142,9 +144,6 @@ class ConverterWidget(QWidget):
         self.hline.setGeometry(0, self.y, self.width(), 1) 
         self.hline.setStyleSheet("border: 1px solid #C5C5C5;")
 
-        # Set window flags to stay on top
-        self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
-
         self.shortcut_return = QShortcut(QKeySequence(Qt.Key_F1), self)
         self.shortcut_return.activated.connect(self.copy_cmin_result)
         self.shortcut_return = QShortcut(QKeySequence(Qt.Key_F2), self)
@@ -164,7 +163,7 @@ class ConverterWidget(QWidget):
             inch = cm * 0.393701
             self.in_input.textChanged.disconnect()
             self.in_input.setText(f"{inch:.4f}")
-            self.cmin_result.setText(f"{cm:.2f} cm / {inch:.2f} in")
+            self.cmin_result.setText(f"{cm:.2f} cm / {inch:.2f} inch")
             self.in_input.textChanged.connect(self.convert_inch_to_cm)
         except ValueError:
             self.cmin_result.setText("未输入换算数字")
@@ -177,7 +176,7 @@ class ConverterWidget(QWidget):
             cm = inch / 0.393701
             self.cm_input.textChanged.disconnect()
             self.cm_input.setText(f"{cm:.4f}")
-            self.cmin_result.setText(f"{inch:.2f} in / {cm:.2f} cm")
+            self.cmin_result.setText(f"{inch:.2f} inch / {cm:.2f} cm")
             self.cm_input.textChanged.connect(self.convert_cm_to_inch)
         except ValueError:
             self.cmin_result.setText("未输入换算数字")
@@ -243,7 +242,6 @@ class ConverterWidget(QWidget):
             msg.exec_()
             self.g_input.clear()
             self.oz_input.clear()
-
 
 
 if __name__ == "__main__":
